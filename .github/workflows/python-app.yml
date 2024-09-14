@@ -1,0 +1,26 @@
+name: Crypto News Bot
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour. You can adjust the cron schedule to fit your needs.
+  workflow_dispatch:  # Allows manual triggering from the GitHub UI.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Specify Python version
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run the crypto news bot
+      run: |
+        python app.py
